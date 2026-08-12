@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABA KHQR Code Design</title>
+    <!-- Google Font សម្រាប់អក្សរខ្មែរ និងអង់គ្លេស -->
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome សម្រាប់ Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Kantumruy Pro', sans-serif;
+        }
+
+        body {
+            background-color: #0d131a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* KHQR Main Container */
+        .khqr-wrapper {
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Card Box */
+        .khqr-card {
+            background-color: #1a232e;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        /* Red Header */
+        .khqr-header {
+            background-color: #e61c24;
+            padding: 12px;
+            text-align: center;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
+        }
+
+        .khqr-logo-text {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+
+        /* Card Content */
+        .khqr-content {
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        .account-name {
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .account-amount {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        /* Dashed Line Divider */
+        .dashed-divider {
+            border-top: 2px dashed #2c3847;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        /* QR Code Frame */
+        .qr-frame {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .qr-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Center Logo overlay on QR */
+        .qr-center-icon {
+            position: absolute;
+            width: 36px;
+            height: 36px;
+            background-color: #e61c24;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 16px;
+        }
+
+        /* Add Amount Button */
+        .btn-add-amount {
+            margin-top: 16px;
+            width: 100%;
+            background-color: #0088a9;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-add-amount:hover {
+            background-color: #007693;
+        }
+
+        /* Account Numbers List */
+        .account-list {
+            width: 100%;
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 8px;
+        }
+
+        .account-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .account-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #d1d5db;
+        }
+
+        .account-number {
+            font-weight: 600;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Bottom Action Buttons */
+        .bottom-actions {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 24px;
+        }
+
+        .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .action-icon {
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: background-color 0.2s;
+        }
+
+        .action-item:hover .action-icon {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="khqr-wrapper">
+        <!-- KHQR Card -->
+        <div class="khqr-card">
+            <!-- Red Top Header -->
+            <div class="khqr-header">
+                <span class="khqr-logo-text">KHQR</span>
+            </div>
+
+            <!-- Card Content -->
+            <div class="khqr-content">
+                <div class="account-name">BAOKIM KHOV</div>
+                <div class="account-amount">0</div>
+                
+                <div class="dashed-divider"></div>
+
+                <!-- QR Code Display -->
+                <div class="qr-frame">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=BAOKIM_KHOV_KHQR" alt="KHQR Code">
+                    <div class="qr-center-icon">
+                        <i class="fa-solid fa-[#]">KH</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Amount Button -->
+        <button class="btn-add-amount">
+            <i class="fa-solid fa-circle-plus"></i>
+            <span>បញ្ចូលចំនួនទឹកប្រាក់</span>
+        </button>
+
+        <!-- Account Info List -->
+        <div class="account-list">
+            <div class="account-item">
+                <div class="account-label">
+                    <i class="fa-regular fa-circle-info"></i>
+                    <span>ទទួលប្រាក់រៀលចូល:</span>
+                </div>
+                <div class="account-number">
+                    010 369 630 <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+
+            <div class="account-item">
+                <div class="account-label">
+                    <i class="fa-regular fa-circle-dollar"></i>
+                    <span>ទទួលប្រាក់ដុល្លារចូល:</span>
+                </div>
+                <div class="account-number">
+                    010 369 627 <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Action Icons -->
+        <div class="bottom-actions">
+            <div class="action-item">
+                <div class="action-icon">
+                    <i class="fa-solid fa-qrcode"></i>
+                </div>
+                <span>ទាញយក</span>
+            </div>
+            <div class="action-item">
+                <div class="action-icon">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                </div>
+                <span>ផ្ញើ QR</span>
+            </div>
+            <div class="action-item">
+                <div class="action-icon">
+                    <i class="fa-paper-plane"></i>
+                </div>
+                <span>តេឡេក្រាម</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

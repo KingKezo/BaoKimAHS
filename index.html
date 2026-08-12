@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KimFood Restaurant - រសជាតិពិតៗ</title>
+    
+    <!-- Google Fonts សម្រាប់អក្សរខ្មែរ និងអង់គ្លេស -->
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* --- CSS Reset & Variables --- */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #f7b731;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #fff;
+            --khqr-red: #e61c24;
+            --khqr-dark: #1a232e;
+            --font-family: 'Kantumruy Pro', 'Poppins', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            color: var(--text-color);
+            background-color: var(--white);
+            scroll-behavior: smooth;
+        }
+
+        span { color: var(--primary-color); }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* ================= TOP NOTICE BANNER ================= */
+        .top-notice-bar {
+            background: linear-gradient(to right, #e63946, #f7b731);
+            color: var(--white);
+            text-align: center;
+            padding: 8px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1002;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .top-notice-bar i {
+            font-size: 16px;
+            animation: bellRing 1.5s infinite alternate;
+        }
+
+        @keyframes bellRing {
+            0% { transform: rotate(0deg); }
+            20% { transform: rotate(15deg); }
+            40% { transform: rotate(-15deg); }
+            60% { transform: rotate(10deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        /* ================= NAVBAR ================= */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8%;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 36px;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar .logo i { color: var(--primary-color); }
+
+        .navbar nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .navbar .order-btn {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .navbar .order-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        /* ================= HERO ================= */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 180px 8% 100px;
+            background-color: var(--light-bg);
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 50px;
+        }
+
+        .hero-text .small-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin: 20px 0;
+            line-height: 1.3;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .main-btn, .second-btn {
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .main-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .second-btn {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .main-btn:hover { background-color: #e05e5e; }
+        .second-btn:hover { background-color: var(--primary-color); color: var(--white); }
+
+        .hero-image {
+            flex: 1;
+            text-align: right;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        /* ================= CATEGORIES ================= */
+        .section {
+            padding: 100px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title p { color: var(--primary-color); text-transform: uppercase; letter-spacing: 2px; }
+        .section-title h2 { font-size: 36px; margin: 10px 0; }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .category {
+            background-color: var(--light-bg);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .category-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .category h3 { font-size: 22px; margin-bottom: 10px; }
+        .category p { color: #666; }
+
+        /* ================= WHY US ================= */
+        .why-us {
+            padding: 100px 8%;
+            background-color: var(--light-bg);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .feature {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .feature:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+        .feature i {
+            font-size: 40px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature h3 { font-size: 20px; margin-bottom: 10px; }
+
+        /* ================= MENU ================= */
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .food-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .food-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
+
+        .food-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .food-info { padding: 25px; }
+
+        .food-info span {
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .food-info h3 { font-size: 22px; margin: 10px 0; }
+        .food-info p { color: #666; margin-bottom: 20px; }
+
+        .food-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .food-bottom strong { font-size: 20px; color: var(--text-color); }
+
+        .food-bottom button {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .food-bottom button:hover { background-color: #f6ac1a; }
+
+        /* ================= ABOUT ================= */
+        .about {
+            padding: 100px 8%;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-image { flex: 1; }
+        .about-image img { width: 100%; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+        .about-text { flex: 1; }
+        .about-text p:first-of-type { color: var(--primary-color); font-weight: 600; text-transform: uppercase; }
+        .about-text h2 { font-size: 36px; margin: 15px 0; }
+        .about-text p:last-of-type { color: #666; line-height: 1.6; margin-bottom: 40px; }
+
+        .numbers { display: flex; gap: 30px; }
+        .numbers div { text-align: center; }
+        .numbers strong { font-size: 32px; color: var(--primary-color); }
+        .numbers span { display: block; margin-top: 5px; color: #777; }
+
+        /* ================= TESTIMONIAL ================= */
+        .testimonial {
+            padding: 100px 8%;
+            background-color: var(--light-bg);
+            text-align: center;
+        }
+
+        .review {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .stars { color: #f7b731; font-size: 24px; margin-bottom: 20px; }
+        .review p { font-size: 18px; font-style: italic; color: #555; line-height: 1.6; margin-bottom: 20px; }
+        .review h3 { font-size: 20px; color: var(--text-color); }
+
+        /* ================= ORDER MODAL & KHQR ================= */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* ដំបូងបង្ហាញតែទម្រង់បំពេញពេញអេក្រង់ */
+            gap: 30px;
+            margin-top: 15px;
+            transition: all 0.4s ease;
+        }
+
+        /* នៅពេលបញ្ជូនរួច ប្តូរទៅជា ២ ຖັນវិញដោយស្វ័យប្រវត្តិ */
+        .modal-grid.show-qr {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 768px) {
+            .modal-grid.show-qr {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .close-btn:hover { color: var(--primary-color); }
+
+        .modal-content h2 {
+            margin-top: 0;
+            color: var(--text-color);
+            font-size: 22px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-content h2 i { color: var(--primary-color); }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .submit-order-btn {
+            width: 100%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            border: none;
+            padding: 14px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .submit-order-btn:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+        }
+
+        /* --- ABA KHQR CONTAINER & STYLES --- */
+        .khqr-container-wrapper {
+            display: none; /* លាក់ទុកដំបូង រហូតដល់ចុច Submit ទើបបង្ហាញ */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInQR 0.5s ease;
+        }
+
+        @keyframes fadeInQR {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .khqr-card {
+            width: 100%;
+            max-width: 340px;
+            background-color: var(--khqr-dark);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .khqr-header {
+            background-color: var(--khqr-red);
+            padding: 12px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
+        }
+
+        .khqr-logo-text {
+            color: var(--white);
+            font-weight: 800;
+            font-size: 22px;
+            letter-spacing: 2px;
+        }
+
+        .khqr-content {
+            padding: 20px;
+            color: var(--white);
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .account-name {
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            color: #e2e8f0;
+        }
+
+        .account-amount {
+            font-size: 26px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .dashed-divider {
+            border-top: 2px dashed #2c3847;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .qr-frame {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .qr-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .qr-center-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border: 2px solid #ffffff;
+        }
+
+        .qr-center-logo i {
+            color: var(--khqr-red);
+            font-size: 20px;
+        }
+
+        .khqr-instruction {
+            font-size: 12px;
+            color: #a0aec0;
+            margin-top: 15px;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            padding: 80px 8% 30px;
+            background-color: #222;
+            color: #bbb;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-container h2 { color: var(--white); font-size: 28px; margin-bottom: 20px; }
+        .footer-container h2 span { color: var(--primary-color); }
+        .footer-container h3 { color: var(--white); margin-bottom: 20px; font-size: 18px; }
+        .footer-container p { line-height: 1.6; }
+        .footer-container a { display: block; margin-bottom: 10px; }
+        .footer-container a:hover { color: var(--white); }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #444;
+            padding-top: 30px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= TOP NOTICE BANNER ================= -->
+<div class="top-notice-bar">
+    <i class="fa-solid fa-bell"></i>
+    <span>ជូនដំណឹង៖ រាល់ការចុះឈ្មោះបញ្ជាទិញរួចរាល់ ព័ត៌មាននឹងត្រូវបញ្ជូនសារទៅកាន់ភ្នាក់ងាររបស់យើងភ្លាមៗ!</span>
+</div>
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+    <div class="logo">
+        <i class="fa-solid fa-utensils"></i>
+        Kim<span>Food</span>
+    </div>
+
+    <nav>
+        <a href="#home">ទំព័រដើម</a>
+        <a href="#categories">ប្រភេទអាហារ</a>
+        <a href="#menu">មុខម្ហូប</a>
+        <a href="#about">អំពីយើង</a>
+        <a href="#contact">ទំនាក់ទំនង</a>
+    </nav>
+
+    <button class="order-btn">
+        កម្មង់ឥឡូវនេះ
+    </button>
+</header>
+
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="home">
+    <div class="hero-text">
+        <p class="small-title">
+            រសជាតិពិតៗ ធ្វើដោយបេះដូង
+        </p>
+        <h1>
+            អាហារស្រស់ៗ<br>
+            <span>សម្រាប់អ្នក</span>
+        </h1>
+        <p>
+            រីករាយជាមួយមុខម្ហូបដ៏ឈ្ងុយឆ្ងាញ់ ដែលធ្វើចេញពីគ្រឿងផ្សំស្រស់ៗ និងល្អបំផុត។
+        </p>
+        <div class="hero-buttons">
+            <a href="#menu" class="main-btn">
+                មើលមុខម្ហូប
+            </a>
+            <a href="#about" class="second-btn">
+                ស្វែងយល់បន្ថែម
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1594179047519-f347310d3322?q=80&w=1470&auto=format&fit=crop" alt="Delicious Food">
+    </div>
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+<section class="section" id="categories">
+    <div class="section-title">
+        <p>ស្វែងរកអាហាររបស់យើង</p>
+        <h2>ប្រភេទអាហារកំពូលៗ</h2>
+    </div>
+
+    <div class="categories">
+        <div class="category">
+            <div class="category-icon">🍔</div>
+            <h3>ប៊ឺហ្គឺ</h3>
+            <p>ប៊ឺហ្គឺស្រស់ៗ និងមានឱជារស</p>
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🍕</div>
+            <h3>ពីហ្សា</h3>
+            <p>ពីហ្សាក្តៅៗ និងឈ្ងុយឆ្ងាញ់</p>
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🍜</div>
+            <h3>មីឆា</h3>
+            <p>មីឆាពិសេស រសជាតិអាស៊ី</p>
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🍰</div>
+            <h3>បង្អែម</h3>
+            <p>បង្អែមផ្អែមៗ និងឆ្ងាញ់ពិសា</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= WHY US ================= -->
+<section class="why-us">
+    <div class="section-title">
+        <p>ហេតុអ្វីជ្រើសរើសយើង</p>
+        <h2>យើងធ្វើឱ្យអាហារកាន់តែប្រសើរ</h2>
+    </div>
+
+    <div class="features">
+        <div class="feature">
+            <i class="fa-solid fa-leaf"></i>
+            <h3>គ្រឿងផ្សំស្រស់ៗ</h3>
+            <p>យើងប្រើប្រាស់គ្រឿងផ្សំស្រស់ៗ និងមានគុណភាពជារៀងរាល់ថ្ងៃ។</p>
+        </div>
+
+        <div class="feature">
+            <i class="fa-solid fa-user-tie"></i>
+            <h3>ចុងភៅជំនាញ</h3>
+            <p>ចុងភៅរបស់យើងរៀបចំរាល់មុខម្ហូបដោយយកចិត្តទុកដាក់។</p>
+        </div>
+
+        <div class="feature">
+            <i class="fa-solid fa-bowl-food"></i>
+            <h3>អាហារឈ្ងុយឆ្ងាញ់</h3>
+            <p>រសជាតិដ៏អស្ចារ្យដែលអ្នកនឹងមិនអាចភ្លេចបាន។</p>
+        </div>
+
+        <div class="feature">
+            <i class="fa-solid fa-heart"></i>
+            <h3>សេវាកម្មល្អបំផុត</h3>
+            <p>សេវាកម្មប្រកបដោយភាពរួសរាយរាក់ទាក់សម្រាប់អតិថិជនគ្រប់រូប។</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= MENU ================= -->
+<section class="section" id="menu">
+    <div class="section-title">
+        <p>មុខម្ហូបពិសេសរបស់យើង</p>
+        <h2>មុខម្ហូបពេញនិយម</h2>
+    </div>
+
+    <div class="menu-container">
+        <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1599&auto=format&fit=crop" alt="Classic Burger">
+            <div class="food-info">
+                <span>ប៊ឺហ្គឺ</span>
+                <h3>ប៊ឺហ្គឺខ្លាសិក</h3>
+                <p>ប៊ឺហ្គឺសាច់គោដ៏មានជាតិ ជាមួយបន្លែស្រស់ៗ。</p>
+                <div class="food-bottom">
+                    <strong>$5.99</strong>
+                    <button class="cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1470&auto=format&fit=crop" alt="Cheese Pizza">
+            <div class="food-info">
+                <span>ពីហ្សា</span>
+                <h3>ពីហ្សាឈីស</h3>
+                <p>ពីហ្សាក្តៅៗ ជាមួយឈីសម៉ូហ្សារ៉េឡាដ៏ឈ្ងុយឆ្ងាញ់。</p>
+                <div class="food-bottom">
+                    <strong>$8.99</strong>
+                    <button class="cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1552611052-33e04de081de?q=80&w=1564&auto=format&fit=crop" alt="Special Noodles">
+            <div class="food-info">
+                <span>មីឆា</span>
+                <h3>មីឆាពិសេស</h3>
+                <p>មីឆាដ៏មានរសជាតិ ជាមួយបន្លែ និងគ្រឿងសមុទ្រ。</p>
+                <div class="food-bottom">
+                    <strong>$6.50</strong>
+                    <button class="cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=1574&auto=format&fit=crop" alt="Chocolate Cake">
+            <div class="food-info">
+                <span>បង្អែម</span>
+                <h3>នំខេកសូកូឡា</h3>
+                <p>នំខេកសូកូឡាទន់ៗ ជាមួយគ្រីមសូកូឡាដ៏ឈ្ងុយឆ្ងាញ់。</p>
+                <div class="food-bottom">
+                    <strong>$4.99</strong>
+                    <button class="cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+<section class="about" id="about">
+    <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1470&auto=format&fit=crop" alt="Restaurant Interior">
+    </div>
+
+    <div class="about-text">
+        <p>អំពីភោជនីយដ្ឋានរបស់យើង</p>
+        <h2>យើងបម្រើអាហារស្រស់ៗ និងឈ្ងុយឆ្ងាញ់</h2>
+        <p>
+            KimFood ជាភោជនីយដ្ឋានទំនើប ដែលផ្តល់ជូននូវអាហារដ៏ឈ្ងុយឆ្ងាញ់ ធ្វើចេញពីគ្រឿងផ្សំស្រស់ៗ។ គោលដៅរបស់យើងគឺផ្តល់ឱ្យអតិថិជនគ្រប់រូបនូវបទពិសោធន៍ទទួលទានអាហារដ៏អស្ចារ្យ។
+        </p>
+        <div class="numbers">
+            <div>
+                <strong>10+</strong>
+                <span>ឆ្នាំបទពិសោធន៍</span>
+            </div>
+            <div>
+                <strong>5K+</strong>
+                <span>អតិថិជនសប្បាយចិត្ត</span>
+            </div>
+            <div>
+                <strong>50+</strong>
+                <span>មុខម្ហូប</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= TESTIMONIAL ================= -->
+<section class="testimonial">
+    <div class="section-title">
+        <p>អតិថិជនរបស់យើង</p>
+        <h2>អ្វីដែលមនុស្សនិយាយ</h2>
+    </div>
+
+    <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>
+            "អាហារពិតជាឈ្ងុយឆ្ងាញ់ ហើយសេវាកម្មក៏ល្អឥតខ្ចោះ។ ខ្ញុំពិតជាពេញចិត្តបទពិសោធន៍របស់ខ្ញុំនៅទីនេះ!"
+        </p>
+        <h3>— Kim</h3>
+    </div>
+</section>
+
+
+<!-- ================= ORDER MODAL FORM WITH KHQR ================= -->
+<div id="orderModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2><i class="fa-solid fa-utensils"></i> ទម្រង់បែបបទបញ្ជាទិញអាហារ & បង់ប្រាក់</h2>
+        
+        <div class="modal-grid" id="modalGrid">
+            <!-- Form បំពេញព័ត៌មាន -->
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="fullName">ឈ្មោះពេញ *</label>
+                    <input type="text" id="fullName" required placeholder="បញ្ចូលឈ្មោះរបស់អ្នក">
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">ភេទ *</label>
+                    <select id="gender" required>
+                        <option value="">-- ជ្រើសរើសភេទ --</option>
+                        <option value="ប្រុស">ប្រុស</option>
+                        <option value="ស្រី">ស្រី</option>
+                        <option value="ផ្សេងៗ">ផ្សេងៗ</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">លេខទូរស័ព្ទ *</label>
+                    <input type="tel" id="phone" required placeholder="012 345 678">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">អាសយដ្ឋានអ៊ីមែល (Gmail) *</label>
+                    <input type="email" id="email" required placeholder="example@gmail.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="address">អាសយដ្ឋានដឹកជញ្ជូន *</label>
+                    <textarea id="address" rows="2" required placeholder="ផ្ទះលេខ, ផ្លូវ, សង្កាត់/ឃុំ, ខណ្ឌ/ស្រុក, រាជធានី/ខេត្ត..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="foodItem">ជ្រើសរើសមុខម្ហូប *</label>
+                    <select id="foodItem" required>
+                        <option value="ប៊ឺហ្គឺខ្លាសិក ($5.99)">ប៊ឺហ្គឺខ្លាសិក ($5.99)</option>
+                        <option value="ពីហ្សាឈីស ($8.99)">ពីហ្សាឈីស ($8.99)</option>
+                        <option value="មីឆាពិសេស ($6.50)">មីឆាពិសេស ($6.50)</option>
+                        <option value="នំខេកសូកូឡា ($4.99)">នំខេកសូកូឡា ($4.99)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="note">កំណត់ចំណាំបន្ថែម</label>
+                    <textarea id="note" rows="2" placeholder="ឧទាហរណ៍៖ មិនដាក់ម្ទេស, បន្ថែមទឹកជ្រលក់..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-order-btn" id="submitBtn">
+                    <i class="fa-solid fa-paper-plane"></i> បញ្ជូនការកម្មង់ & បង្ហាញ QR ទូទាត់
+                </button>
+            </form>
+
+            <!-- ABA KHQR Container Component (លាក់ទុកមុនពេល Submit) -->
+            <div class="khqr-container-wrapper" id="khqrContainer">
+                <div class="khqr-card">
+                    <div class="khqr-header">
+                        <div class="khqr-logo-text">KHQR</div>
+                    </div>
+                    <div class="khqr-content">
+                        <div class="account-name">KIMFOOD RESTAURANT</div>
+                        <div class="account-amount" id="khqrAmountDisplay">$5.99 USD</div>
+                        <div class="dashed-divider"></div>
+                        <div class="qr-frame">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=KimFood-Restaurant-Payment" alt="KHQR Code">
+                            <div class="qr-center-logo">
+                                <i class="fa-solid fa-dollar-sign"></i>
+                            </div>
+                        </div>
+                        <p class="khqr-instruction">
+                            <i class="fa-solid fa-qrcode"></i> ស្កែនជាមួយកម្មវិធីធនាគារណាមួយដើម្បីបង់ប្រាក់
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+<footer id="contact">
+    <div class="footer-container">
+        <div>
+            <h2>Kim<span>Food</span></h2>
+            <p>អាហារស្រស់ៗ រសជាតិដ៏អស្ចារ្យ និងសេវាកម្មល្អឥតខ្ចោះ。</p>
+        </div>
+
+        <div>
+            <h3>តំណភ្ជាប់រហ័ស</h3>
+            <a href="#home">ទំព័រដើម</a>
+            <a href="#menu">មុខម្ហូប</a>
+            <a href="#about">អំពីយើង</a>
+            <a href="#contact">ទំនាក់ទំនង</a>
+        </div>
+
+        <div>
+            <h3>ទំនាក់ទំនង</h3>
+            <p>📍 ប្រទេសកម្ពុជា</p>
+            <p>📞 +855 976 184 726</p>
+            <p>✉️ baokim99@gmail.com</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © 2026 KimFood. រក្សាសិទ្ធិគ្រប់យ៉ាង។
+    </div>
+</footer>
+
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+    const modal = document.getElementById("orderModal");
+    const orderBtns = document.querySelectorAll(".order-btn, .cart-btn");
+    const closeBtn = document.querySelector(".close-btn");
+    const orderForm = document.getElementById("orderForm");
+    const foodSelect = document.getElementById("foodItem");
+    const khqrAmountDisplay = document.getElementById("khqrAmountDisplay");
+    const modalGrid = document.getElementById("modalGrid");
+    const khqrContainer = document.getElementById("khqrContainer");
+    const submitBtn = document.getElementById("submitBtn");
+
+    // មុខងារអាប់ដេតតម្លៃលើ QR
+    function updateKHQRPrice(foodValue) {
+        const match = foodValue.match(/\(\$([0-9.]+)\)/);
+        if (match && match[1]) {
+            khqrAmountDisplay.innerText = `$${match[1]} USD`;
+        }
+    }
+
+    foodSelect.addEventListener("change", (e) => {
+        updateKHQRPrice(e.target.value);
+    });
+
+    // បើក Modal និង Reset សភាពដើម
+    orderBtns.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            // លាក់ QR និងបិទ grid ពីរຖັນពេលបើកសារថ្មី
+            modalGrid.classList.remove("show-qr");
+            khqrContainer.style.display = "none";
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> បញ្ជូនការកម្មង់ & បង្ហាញ QR ទូទាត់';
+            orderForm.reset();
+
+            const foodCard = e.target.closest(".food-card");
+            if (foodCard) {
+                const foodTitle = foodCard.querySelector("h3").innerText;
+                Array.from(foodSelect.options).forEach(opt => {
+                    if (opt.value.includes(foodTitle)) {
+                        foodSelect.value = opt.value;
+                        updateKHQRPrice(opt.value);
+                    }
+                });
+            } else {
+                updateKHQRPrice(foodSelect.value);
+            }
+            modal.style.display = "flex";
+        });
+    });
+
+    closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+    // នៅពេលបំពេញទម្រង់រួចរាល់ហើយចុច Submit វានឹងបង្ហាញ QR ឡើង
+    orderForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> កំពុងដំណើរការ...';
+
+        setTimeout(() => {
+            // បង្ហាញ Layout ២ ຖັນ និង បង្ហាញ QR Code ផ្នែកខាងស្តាំ
+            modalGrid.classList.add("show-qr");
+            khqrContainer.style.display = "flex";
+            
+            submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> បានបញ្ជូនទម្រង់រួចរាល់ (សូមស្កែនបង់ប្រាក់)';
+        }, 1000);
+    });
+</script>
+
+</body>
+</html>
